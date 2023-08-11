@@ -87,7 +87,7 @@ router.put('/api/news/:id', async(req, res) => {
         const updateNewId = await news.findById(req.params.id);
         if (`${userId._id}` == `${updateNewId.user}`) {
             const updateNews = await news.findByIdAndUpdate(req.params.id, {$set: req.body});
-            res.status(200).json("Update successful!");
+            res.status(200).json("Update news successful!");
         } else {
             res.status(403).json("You cannot update news that are not yours!");
         }
@@ -103,9 +103,9 @@ router.delete('/api/news/:id', async(req, res)=>{
         const users = Schemas.Users;
         const userId = await users.findOne({username: 'admin'}).exec();
         const deleteNewsId = await news.findById(req.params.id);
-        if (`${userId._id}` == `${deleteNewId.user}`) {
+        if (`${userId._id}` == `${deleteNewsId.user}`) {
             const deleteNews = await news.findByIdAndDelete(req.params.id);
-            res.status(200).json(`New deleted: ${deleteNews}`);
+            res.status(200).json(`News deleted: ${deleteNews}`);
         } else {
             res.status(403).json("You cannot delete news that are not yours!");
         }
