@@ -16,8 +16,8 @@ const newsSchema = new Schema({
     entryDate: {type:Date, default:Date.now}
 })
 
-const Users = mongoose.model('users', userSchema, 'users');
-const News = mongoose.model('news', newsSchema, 'news');
+const Users = mongoose.model('users', userSchema);
+const News = mongoose.model('news', newsSchema);
 const mySchemas = {'Users':Users, 'News':News};
 
 module.exports = mySchemas;
