@@ -1,16 +1,19 @@
 const express = require('express');
+const cors = require('cors');
 const routesHandler = require('./routes/handler.js');
 const mongoose = require('mongoose');
 require('dotenv/config');
 
 //routes
 const app = express();
+app.use(cors())
 app.use(express.json());
 app.use(express.urlencoded());
 app.use('/', routesHandler);
 
 //mongodb connect
-mongoose.connect(process.env.DB_URI, {useNewUrlParser:true, useUnifiedTopology:true}).then( () => {
+const mongodb_uri = process.env.DB_URI; 
+mongoose.connect(mongodb_uri, {useNewUrlParser:true, useUnifiedTopology:true}).then( () => {
     console.log(`Mongodb connected!`);
 }).catch( (err) => {
     console.log(err);

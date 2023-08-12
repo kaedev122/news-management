@@ -3,9 +3,9 @@ const router = express.Router();
 const Schemas = require('../models/Schemas.js');
 
 //USERS API
-/*
-router.get('/addUser', async(req, res) => {
-    const user = {username: 'staff1', fullname: 'bot1'};
+//ADD USER (NOT DONE YET)
+router.post('/api/addUser', async(req, res) => {
+    const user = {username: 'staff1', fullname: 'ZZZ', password: '123456'};
     const newUser = new Schemas.Users(user);
 
     try {
@@ -18,7 +18,26 @@ router.get('/addUser', async(req, res) => {
         res.end('Cannot add new user!');
     }
 });
-*/
+
+
+//LOGIN API
+router.post('/login', async(req, res) => {
+    try {
+        const users = Schemas.Users;
+        const checkUsername = await users.findOne({username: req.body.username});
+        if (checkUsername != null) {
+            if (checkUsername.password == req.body.password) {
+                res.status(200).json('Login success!');
+            } else {
+                res.status(401).json('Wrong password!')
+            }
+        } else {
+            res.status(401).json('Username does not exist!')
+        }
+    } catch(err) {
+        res.json(err);
+    }
+});
 
 //NEWS API
 //GET ALL NEWS
