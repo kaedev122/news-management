@@ -13,7 +13,8 @@ const newsSchema = new Schema({
     // _id:
     title: {type:String, required:true},
     content: {type:String, required:true},
-    user: {type:Schema.Types.ObjectId, ref:'users'},
+    userId: {type:Schema.Types.ObjectId, ref:'users'},
+    username: {type:String},
     entryDate: {type:Date, default:Date.now}
 })
 
