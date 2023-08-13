@@ -14,14 +14,54 @@ body {
 
 .App {
   height: 100%;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  min-width: 100vh;
 }
 
+/* CSS for /login */
 .login-form {
   width: 400px;
   height: 320px;
   background-color: var(--primary);
+}
+
+/* CSS for /home */
+.container {
+  width: 100vw;
+  height: 100%;
+}
+
+.header {
+  z-index: 1;
+  width: 100%;
+  height: 46px;
+  background-color: #000;
+  position: fixed;
+  top: 0;
+}
+
+.header .navbar .login-info {
+  float: right;
+}
+
+.login-info {
+
+}
+
+.homepage {
+  padding-top: 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.homepage ul {
+  width: 80vw;
+}
+
+.homepage h1 {
+  
+}
+
+.homepage ul li {
+  padding: 12px 0 0 12px;
 }

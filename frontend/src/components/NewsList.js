@@ -1,31 +1,34 @@
-import React from 'react';
+import React, { useEffect, useState } from "react";
 import axios from 'axios';
 
 const NewsList = ({ news, onDeleteNews }) => {
-  const handleDeleteNews = async (id) => {
-    try {
-      await axios.delete(`/api/news/${id}`);
-      onDeleteNews(id);
-    } catch (error) {
-      console.error("Error deleting news: ", error);
-    }
-  };
+	const [newsList, setNewsList] = useState([]);
 
-  return (
-    <div className="todos">
-      {news.length > 0 ? news.map((item) => (
-        <div className="todo" key={item._id}>
-          <div className="text">
-            <h3>{item.title}</h3>
-            <p>{item.content}</p>
-          </div>
-          <div className="delete-todo" onClick={() => handleDeleteNews(item._id)}>x</div>
-        </div>
-      )) : (
-        <p>There is no news at the moment</p>
-      )}
-    </div>
-  );
+	useEffect(() => {
+    //Call API bằng Axios khi component được mount
+    axios.get('http://localhost:3000/api/news')
+		.then(res => {
+        	setNewsList(res.data);
+		})
+		.catch(err => {
+        	alert(err.response.data);
+      	});
+  	}, []); //Sử dụng mảng rỗng để chỉ call một lần khi mount
+
+  	return (
+    	<div>
+      		<ul>
+        		{ newsList.map(news => (
+          			<li>
+						<h1>{news.title}</h1>
+						<p>{news.content}</p>
+						<div><span>Author: </span>{news.username}</div>
+						<div><span>Date Submitted: </span>{news.entryDate.match(/([^T]+)/)[0].split("-").reverse().join("/")}</div>
+					</li> 
+				))}
+      		</ul>
+    	</div>
+  	);
 };
 
 export default NewsList;

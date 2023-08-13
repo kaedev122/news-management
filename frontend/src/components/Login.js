@@ -25,13 +25,10 @@ function Login() {
             .catch(err => {
                 alert(err.response.data);
             })
-
         }
         catch(e){
             console.log(e);
-
         }
-
     }
 
     return (
