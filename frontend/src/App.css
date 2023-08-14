@@ -34,7 +34,7 @@ body {
   z-index: 1;
   width: 100%;
   height: 46px;
-  background-color: #000;
+  background-color: var(--dark);
   position: fixed;
   top: 0;
 }
@@ -64,4 +64,71 @@ body {
 
 .homepage ul li {
   padding: 12px 0 0 12px;
+}
+
+.add-news-button {
+
+}
+
+.add-button {
+	position: fixed;
+	bottom: 32px;
+	right: 32px;
+	display: flex;
+  background-color: var(--light);
+  color: var(--dark);
+  padding: 20px 40px;
+  border-radius: 20px;
+  font-size: 30px;
+  cursor: pointer;
+}
+
+.add-button:hover {
+  background-color: var(--dark);
+  color: var(--light);
+}
+
+.add-news-form-popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+  background-color: var(--dark);
+  width: 90vw;
+  height: 550px;
+}
+
+.close-popup {
+  align-items: center;
+  justify-content: center;
+  padding: 10px 10px 10px 10px;
+  float: right;
+  cursor: pointer;
+}
+
+.close-popup:hover {
+  background-color: var(--primary);
+  color: var(--light-alt)
+}
+
+.add-news-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.popup-input {
+  width: 96%;
+  padding: 12px 20px;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  background-color: #f8f8f8;
+  font-size: 16px;
+  resize: none;
+}
+
+.popup-input-content {
+
 }

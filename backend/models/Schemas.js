@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
+//User: _id, username, fullname, password, entryDate, ...
+//  will update: role (role admin can create more user).
 const userSchema = new Schema({
     // _id: ObjectId
     username: {type:String, required:true},
@@ -9,6 +11,9 @@ const userSchema = new Schema({
     entryDate: {type:Date, default:Date.now}
 });
 
+
+//News: _id, title, content, (userId, username) -> ref to user, entryDate,...
+//  will update: category, ...
 const newsSchema = new Schema({
     // _id:
     title: {type:String, required:true},

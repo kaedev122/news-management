@@ -17,7 +17,6 @@ router.post('/api/user', async(req, res) => {
     }
 });
 
-
 //LOGIN API
 router.post('/login', async(req, res) => {
     try {
@@ -25,7 +24,7 @@ router.post('/login', async(req, res) => {
         const checkUsername = await users.findOne({username: req.body.username});
         if (checkUsername != null) {
             if (checkUsername.password == req.body.password) {
-                res.status(200).json('Login success!');
+                res.status(200).json({_id: checkUsername._id, username: checkUsername.username, msg: 'Login success!'});
             } else {
                 res.status(401).json('Wrong password!')
             }
@@ -73,23 +72,32 @@ router.get('/api/news/:id', async(req, res) => {
     }
 });
 
+//GET NEWS BY USERNAME
+router.get('/api/news/user/:username', async (req, res) => {
+    try {
+        const news = Schemas.News;
+        const allNews = await news.find({username: req.params.username});
+        res.status(200).json(allNews);
+    } catch(err) {
+        res.status(500).json(err);
+    }
+});
+
 //POST NEWS
 router.post('/api/news', async(req, res) => {
     // const userTitle = req.body.titleInput;
     // const userContent = req.body.contentInput;
     // const userTitle = "Title1";
     // const userContent = "content1";
-    const users = Schemas.Users;
-    const userPost = await users.findOne({username: 'admin'}).exec();
     try {
         const newNews = new Schemas.News({
             title: req.body.title,
             content: req.body.content,
-            userId: userPost._id,
-            username: userPost.username
-        })
+            userId: req.body.userId,
+            username: req.body.username
+        });
         const saveNews = await newNews.save();
-        res.status(200).json(saveNews);
+        res.status(200).json("Post success!");
     } catch(err) {
         // res.redirect('/api/news');
         res.status(500).json(err);

@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react"
-import axios from "axios"
-import { useNavigate, Link } from "react-router-dom"
-
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { useNavigate, Link } from "react-router-dom";
 
 function Login() {
 
@@ -19,8 +18,8 @@ function Login() {
                 "password": password
             })
             .then(res => {
-                alert(res.data);
-                history("/home", {state:{id:username}});
+                alert(res.data.msg);
+                history("/home", { state: {userId:res.data._id, username:res.data.username} });
             })
             .catch(err => {
                 alert(err.response.data);
