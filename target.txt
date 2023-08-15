@@ -1,0 +1,5 @@
+- CSS
+- Fix NewsList does not update after post or update news.
+- Add Edited field (value: 1 || 0) 1 is updated, 0 is normal, entryDate news change when update news!
+- Add role for user (role: admin can create, delete another user, role: staff, ....)
+- News can attach image?

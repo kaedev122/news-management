@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from 'axios';
+import DeleteNews from "./DeleteNews";
+import UpdateNews from "./UpdateNews";
 
 const NewsList = (props) => {
 	const [newsList, setNewsList] = useState([]);
@@ -9,23 +11,23 @@ const NewsList = (props) => {
 		handleGetAllNews();
   	}, []); //Sử dụng mảng rỗng để chỉ call một lần khi mount
 
-	const handleGetAllNews = () => {
-		axios.get('http://localhost:3000/api/news')
+	const handleGetAllNews = async () => {
+		await axios.get('http://localhost:3000/api/news')
 		.then(res => {
         	setNewsList(res.data);
 		})
 		.catch(err => {
-        	alert(err.response.data);
+        	alert(err);
       	});
 	};
 
-	const handleGetYourNews = () => {
-		axios.get(`http://localhost:3000/api/news/user/${props.username}`)
+	const handleGetYourNews = async () => {
+		await axios.get(`http://localhost:3000/api/news/user/${props.username}`)
 		.then(res => {
         	setNewsList(res.data);
 		})
 		.catch(err => {
-        	alert(err.response.data);
+        	alert(err);
       	});
 	}
 
@@ -42,6 +44,10 @@ const NewsList = (props) => {
 						<p>{news.content}</p>
 						<div><span>Author: </span>{news.username}</div>
 						<div><span>Date Submitted: </span>{news.entryDate.match(/([^T]+)/)[0].split("-").reverse().join("/")}</div>
+						<div>
+							<UpdateNews news={news} userId={props.userId} onClick={handleGetAllNews}/>
+							<DeleteNews news={news} userId={props.userId} onClick={handleGetAllNews}/>
+						</div>
 					</li> 
 				))}
       		</ul>

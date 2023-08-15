@@ -1,18 +1,20 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-const AddNewsForm = (props) => {
+const UpdateNewsForm = (props) => {
 	const [title, setTitle] = useState("");
 	const [content, setContent] = useState("");
+	const [userId, setUserId] = useState(props.userId);
+	const [username, setUsername] = useState(props.username);
 
-	const handleAddNews = async (e) => {
+	const handleUpdateNews = async (e) => {
 		e.preventDefault();
 		try {
-			await axios.post('http://localhost:3000/api/news', { 
+			const response = await axios.post('http://localhost:3000/api/news', { 
 				"title": title, 
 				"content": content, 
-				"userId": props.userId,
-				"username": props.username
+				"userId": userId,
+				"username": username
 			}).then(res => {
 				console.log(res.data)
                 alert(res.data);
@@ -31,9 +33,9 @@ const AddNewsForm = (props) => {
 			<p>Content</p>
 			<textarea className='popup-input popup-input-content' placeholder='Content' onChange={(event) => { setContent(event.target.value) }}></textarea>
 			<p>Author: {props.username}</p>
-			<button onClick={handleAddNews}>Post</button>
+			<button onClick={handleUpdateNews}>Update</button>
 		</form>
 	)
 };
 
-export default AddNewsForm;
+export default UpdateNewsForm;
