@@ -5,7 +5,7 @@ const UpdateNews = (props) => {
     const [popupActive, setPopupActive] = useState(false);
     const [title, setTitle] = useState(props.news.title);
 	const [content, setContent] = useState(props.news.content);
-    
+
     const handleUpdateYourNews = async () => {
         await axios.put(`http://localhost:3000/api/news/${props.news._id}`, {
             userId: props.userId,
@@ -16,7 +16,7 @@ const UpdateNews = (props) => {
             alert('Update success!');
         })
         .catch(err => {
-            alert(`Failed! ${err}`)
+            alert(`Failed! ${err.response.data}`)
         })
 	}
     

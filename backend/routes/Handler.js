@@ -46,18 +46,6 @@ router.get('/api/news', async (req, res) => {
     } catch(err) {
         res.status(500).json(err);
     }
-/*
-    const news = Schemas.News;
-
-    const userNews = await news.find({}).populate('user').exec((err, newData) => {
-        if (err) throw err;
-        if (newData) {
-            res.end(JSON.stringify(newData));
-        } else {
-            res.end()
-        }
-    })
-*/
 });
 
 
@@ -85,10 +73,6 @@ router.get('/api/news/user/:username', async (req, res) => {
 
 //POST NEWS
 router.post('/api/news', async(req, res) => {
-    // const userTitle = req.body.titleInput;
-    // const userContent = req.body.contentInput;
-    // const userTitle = "Title1";
-    // const userContent = "content1";
     try {
         const newNews = new Schemas.News({
             title: req.body.title,
@@ -96,10 +80,9 @@ router.post('/api/news', async(req, res) => {
             userId: req.body.userId,
             username: req.body.username
         });
-        const saveNews = await newNews.save();
+        await newNews.save();
         res.status(200).json("Post success!");
     } catch(err) {
-        // res.redirect('/api/news');
         res.status(500).json(err);
     }
 })
@@ -109,10 +92,10 @@ router.put('/api/news/:id', async(req, res) => {
     try{
         const news = Schemas.News;
         const users = Schemas.Users;
-        const userPut = await users.findOne({username: 'staff1'}).exec();
+        const userId = await users.findById(req.body.userId).exec();
         const updateNewId = await news.findById(req.params.id);
-        if (userPut._id.valueOf() == updateNewId.userId.valueOf()) {
-            const updateNews = await news.findByIdAndUpdate(req.params.id, {$set: req.body});
+        if (userId._id.valueOf() == updateNewId.userId.valueOf()) {
+            await news.findByIdAndUpdate(req.params.id, {title: req.body.title, content: req.body.content});
             res.status(200).json("Update news successful!");
         } else {
             res.status(403).json("You cannot update news that are not yours!");
@@ -127,7 +110,7 @@ router.delete('/api/news/:id', async(req, res)=>{
     try{
         const news = Schemas.News;
         const users = Schemas.Users;
-        const userId = await users.findOne({username: 'admin'}).exec();
+        const userId = await users.findById(req.body.userId).exec();
         const deleteNewsId = await news.findById(req.params.id);
         if (userId._id.valueOf() == deleteNewsId.userId.valueOf()) {
             const deleteNews = await news.findByIdAndDelete(req.params.id);
