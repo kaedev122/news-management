@@ -8,7 +8,7 @@ const AddNewsForm = (props) => {
 	const handleAddNews = async (e) => {
 		e.preventDefault();
 		try {
-			await axios.post('http://localhost:3000/api/news', { 
+			await axios.post('http://localhost:3001/api/news', { 
 				"title": title, 
 				"content": content, 
 				"userId": props.userId,

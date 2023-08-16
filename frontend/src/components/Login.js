@@ -13,13 +13,13 @@ function Login() {
         e.preventDefault();
 
         try{
-            await axios.post("http://localhost:3000/login", {
+            await axios.post("http://localhost:3001/login", {
                 "username": username, 
                 "password": password
             })
             .then(res => {
                 alert(res.data.msg);
-                history("/home", { state: {userId:res.data._id, username:res.data.username} });
+                history("/home", { state: {userId:res.data._id, username:res.data.username, roleAdmin:res.data.roleAdmin} });
             })
             .catch(err => {
                 alert(err.response.data);

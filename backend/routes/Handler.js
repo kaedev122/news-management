@@ -7,7 +7,6 @@ const Schemas = require('../models/Schemas.js');
 router.post('/api/user', async(req, res) => {
     const user = {username: 'admin', fullname: 'Fong Nguyen', password: '12022002'};
     const newUser = new Schemas.Users(user);
-
     try {
         await newUser.save().then(async(err, newUserResult) => {
             res.status(200).json('New user created!');
@@ -16,6 +15,8 @@ router.post('/api/user', async(req, res) => {
         res.status(500).json(err);
     }
 });
+//DELETE USER
+
 
 //LOGIN API
 router.post('/login', async(req, res) => {
@@ -24,7 +25,7 @@ router.post('/login', async(req, res) => {
         const checkUsername = await users.findOne({username: req.body.username});
         if (checkUsername != null) {
             if (checkUsername.password == req.body.password) {
-                res.status(200).json({_id: checkUsername._id, username: checkUsername.username, msg: 'Login success!'});
+                res.status(200).json({_id: checkUsername._id, username: checkUsername.username, roleAdmin: checkUsername.roleAdmin, msg: 'Login success!'});
             } else {
                 res.status(401).json('Wrong password!')
             }

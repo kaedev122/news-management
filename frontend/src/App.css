@@ -96,7 +96,7 @@ body {
   transform: translate(-50%, -50%);
   background-color: var(--dark);
   width: 90vw;
-  height: 550px;
+  height: 80vh;
 }
 
 .close-popup {
@@ -131,4 +131,15 @@ body {
 
 .popup-input-content {
 
+}
+
+.add-user-button {
+  display: flex;
+  flex-direction: row;
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
 }

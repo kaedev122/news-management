@@ -12,7 +12,7 @@ const NewsList = (props) => {
   	}, []); //Sử dụng mảng rỗng để chỉ call một lần khi mount
 
 	const handleGetAllNews = async () => {
-		await axios.get('http://localhost:3000/api/news')
+		await axios.get('http://localhost:3001/api/news')
 		.then(res => {
         	setNewsList(res.data);
 		})
@@ -22,7 +22,7 @@ const NewsList = (props) => {
 	};
 
 	const handleGetYourNews = async () => {
-		await axios.get(`http://localhost:3000/api/news/user/${props.username}`)
+		await axios.get(`http://localhost:3001/api/news/user/${props.username}`)
 		.then(res => {
         	setNewsList(res.data);
 		})
