@@ -19,9 +19,45 @@ body {
 
 /* CSS for /login */
 .login-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-form h1 {
+  padding: 120px 0 0 0;
+}
+
+.login-form-input {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
   width: 400px;
   height: 320px;
   background-color: var(--primary);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+}
+
+.login-form-input h2 {
+  padding: 15px 0 0 0;
+}
+
+.login-input {
+  width: 100%;
+  padding: 10px 20px;
+}
+
+.login-submit {
+  padding: 10px 10px;
+  margin-top: 40px;
+  width: 100%;
 }
 
 /* CSS for /home */
@@ -39,14 +75,54 @@ body {
   top: 0;
 }
 
-.header .navbar .login-info {
-  float: right;
+/* Navbar */
+.navbar {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+  align-items: center;
 }
 
-.login-info {
-
+.navbar-item {
+  display: flex;
 }
 
+.navbar-logo {
+  font-size: 30px;
+  min-width: 200px;
+  justify-content: center;
+}
+
+.navbar-button {
+  min-width: 200px;
+  justify-content: space-around;
+}
+
+.navbar-button i {
+  margin: 0 5px;
+}
+
+.navbar-add-user-button:hover {
+  cursor: pointer;
+  color: var(--secondary);
+}
+
+.navbar-login-info {
+  justify-content: center;
+  margin: 0 auto;
+  flex-direction: row;
+}
+
+.navbar-login-info i {
+  padding: 0 5px 0 0;
+}
+
+.navbar-logout:hover {
+  cursor: pointer;
+  color: var(--secondary);
+}
+
+/* PAGE */
 .homepage {
   padding-top: 60px;
   display: flex;
@@ -58,16 +134,86 @@ body {
   width: 80vw;
 }
 
+.button-show-news {
+  display: flex;
+  justify-content: center;
+}
+
+.button-show-news button {
+  padding: 10px 10px;
+  margin: 10px 10px;
+  cursor: pointer;
+}
+
+
+.button-show-news button:hover {
+  background-color: var(--dark);
+  color: var(--light);
+}
+
 .homepage h1 {
-  
+
 }
 
 .homepage ul li {
-  padding: 12px 0 0 12px;
+  background-color: var(--dark);
+  padding: 20px 20px 30px 20px;
+  margin: 20px 0 20px 0;
 }
 
-.add-news-button {
+.homepage ul li h2 {
+  color: var(--primary);
+  padding: 0 0 15px 0;
+}
 
+.homepage ul li span {
+  padding: 0 0 0 30px;
+  margin-right: 5px;
+}
+
+.homepage ul li .news-info {
+  float: right;
+  display: flex;
+}
+
+.homepage .update-news-form {
+  padding: 20px 0;
+}
+
+.homepage .popup-input {
+  width: 100%;
+}
+
+.homepage .popup-input-title {
+  height: 50px;
+}
+
+.homepage .popup-input-content {
+  height: 300px;
+}
+
+.homepage ul li i {
+  float: right;
+  padding: 0 5px;
+}
+
+.homepage ul li i:hover {
+  float: right;
+  cursor: pointer;
+  color: var(--light-alt)
+}
+
+.homepage .update-news-button {
+  padding: 10px 15px;
+  margin: 5px 0 0 0;
+  float: right;
+}
+
+/*  */
+.add-news-button:hover {
+  cursor: pointer;
+  background-color: var(--light-alt);
+  color: var(--light);
 }
 
 .add-button {
@@ -77,18 +223,18 @@ body {
 	display: flex;
   background-color: var(--light);
   color: var(--dark);
-  padding: 20px 40px;
-  border-radius: 20px;
+  padding: 15px 25px;
+  border-radius: 10px;
   font-size: 30px;
   cursor: pointer;
 }
 
 .add-button:hover {
-  background-color: var(--dark);
+  background-color: var(--light-alt);
   color: var(--light);
 }
 
-.add-news-form-popup {
+.add-form-popup {
   position: fixed;
   top: 50%;
   left: 50%;
@@ -112,14 +258,44 @@ body {
   color: var(--light-alt)
 }
 
-.add-news-form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.user-form-popup {
+  width: 30vw;
+  height: 70vh;
+}
+
+.user-form .add-user-button {
+  padding: 10px 15px;
+  float: right;
+}
+
+.user-form .add-user-button:hover {
+  color: var(--light);
+  background-color: var(--light-alt);
+}
+
+.add-form {
+  padding: 10px;
+}
+
+.add-form p {
+  padding: 15px 0 0 0;
+}
+
+.add-form .popup-input-title {
+  height: 50px;
+}
+
+.add-form .popup-input-content {
+  height: 300px;
+}
+
+.add-form .add-news-button {
+  float: right;
+  padding: 10px 15px;
 }
 
 .popup-input {
-  width: 96%;
+  width: 100%;
   padding: 12px 20px;
   box-sizing: border-box;
   border: 2px solid #ccc;
@@ -127,19 +303,4 @@ body {
   background-color: #f8f8f8;
   font-size: 16px;
   resize: none;
-}
-
-.popup-input-content {
-
-}
-
-.add-user-button {
-  display: flex;
-  flex-direction: row;
-  position: fixed;
-  top: 20px;
-  left: 50%;
-  margin-right: -50%;
-  transform: translate(-50%, -50%);
-  cursor: pointer;
 }

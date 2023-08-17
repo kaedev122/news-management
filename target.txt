@@ -1,5 +1,5 @@
-1. Add role for user (role: admin can create, delete another user, role: staff, ....).
-2. CSS.
+✔. Add role for user (role: admin can create, delete another user, role: staff, ....).
+✔. CSS.
 3. Beautify code.
 4. Fix NewsList does not update after post or update news.
 5. Paging news.
