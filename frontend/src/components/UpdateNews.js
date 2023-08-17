@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import axios from 'axios';
 
 const UpdateNews = (props) => {
@@ -24,13 +24,12 @@ const UpdateNews = (props) => {
         <div>
             <i className="ti-pencil" onClick={() => setPopupActive(!popupActive)}></i>
             { popupActive ?
-                (<form className='add-news-form'>
+                (<form className='update-news-form'>
                     <p>Title</p>
                     <textarea className='popup-input popup-input-title' placeholder='Title' value={title} onChange={(event) => { setTitle(event.target.value) }}></textarea>
                     <p>Content</p>
                     <textarea className='popup-input popup-input-content' placeholder='Content' value={content} onChange={(event) => { setContent(event.target.value) }}></textarea>
-                    <p>Author</p>
-                    <button onClick={() => {
+                    <button className="update-news-button" onClick={() => {
                         handleUpdateYourNews();
                         setPopupActive(!popupActive);
                     }}>Update</button>

@@ -25,13 +25,13 @@ const AddNewsForm = (props) => {
 	};
 
 	return (
-		<form className='add-news-form'>
+		<form className='add-form'>
 			<p>Title</p>
 			<textarea className='popup-input popup-input-title' placeholder='Title' onChange={(event) => { setTitle(event.target.value) }}></textarea>
 			<p>Content</p>
 			<textarea className='popup-input popup-input-content' placeholder='Content' onChange={(event) => { setContent(event.target.value) }}></textarea>
 			<p>Author: {props.username}</p>
-			<button onClick={handleAddNews}>Post</button>
+			<button className="add-news-button" onClick={handleAddNews}>Post</button>
 		</form>
 	)
 };

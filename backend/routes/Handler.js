@@ -5,10 +5,14 @@ const Schemas = require('../models/Schemas.js');
 //USERS API
 //ADD USER (NOT DONE YET)
 router.post('/api/user', async(req, res) => {
-    const user = {username: 'admin', fullname: 'Fong Nguyen', password: '12022002'};
-    const newUser = new Schemas.Users(user);
     try {
-        await newUser.save().then(async(err, newUserResult) => {
+        const newUser = new Schemas.Users({
+            username: req.body.username,
+            fullname: req.body.fullname,
+            password: req.body.password,
+            roleAdmin: req.body.roleAdmin
+        })
+        await newUser.save().then(() => {
             res.status(200).json('New user created!');
         });
     } catch (err) {
@@ -81,8 +85,9 @@ router.post('/api/news', async(req, res) => {
             userId: req.body.userId,
             username: req.body.username
         });
-        await newNews.save();
-        res.status(200).json("Post success!");
+        await newNews.save().then(() => {
+            res.status(200).json("Post success!");
+        });
     } catch(err) {
         res.status(500).json(err);
     }

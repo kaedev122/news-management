@@ -7,14 +7,13 @@ const NewsList = (props) => {
 	const [newsList, setNewsList] = useState([]);
 
 	useEffect(() => {
-    //Call API bằng Axios khi component được mount
 		handleGetAllNews();
-  	}, []); //Sử dụng mảng rỗng để chỉ call một lần khi mount
+  	}, []);
 
 	const handleGetAllNews = async () => {
 		await axios.get('http://localhost:3001/api/news')
 		.then(res => {
-        	setNewsList(res.data);
+        	setNewsList(res.data.reverse());
 		})
 		.catch(err => {
         	alert(err);
@@ -24,7 +23,7 @@ const NewsList = (props) => {
 	const handleGetYourNews = async () => {
 		await axios.get(`http://localhost:3001/api/news/user/${props.username}`)
 		.then(res => {
-        	setNewsList(res.data);
+        	setNewsList(res.data.reverse());
 		})
 		.catch(err => {
         	alert(err);
@@ -34,19 +33,21 @@ const NewsList = (props) => {
   	return (
     	<div>
 			<div className="button-show-news">
-                <button className="" onClick={handleGetAllNews}>Show all</button>
-                <button className="" onClick={handleGetYourNews}>Show yours</button>
+                <button onClick={handleGetAllNews}>Show all</button>
+                <button onClick={handleGetYourNews}>Show yours</button>
             </div>
       		<ul>
         		{ newsList.map(news => (
           			<li>
-						<h1>{news.title}</h1>
+						<h2>{news.title}</h2>
 						<p>{news.content}</p>
-						<div><span>Author: </span>{news.username}</div>
-						<div><span>Date Submitted: </span>{news.entryDate.match(/([^T]+)/)[0].split("-").reverse().join("/")}</div>
+						<div className="news-info">
+							<span>Author: </span>{news.username}
+							<span>Date Submitted: </span>{news.entryDate.match(/([^T]+)/)[0].split("-").reverse().join("/")}
+						</div>
 						<div>
-							<UpdateNews news={news} userId={props.userId} onClick={handleGetAllNews}/>
 							<DeleteNews news={news} userId={props.userId} onClick={handleGetAllNews}/>
+							<UpdateNews news={news} userId={props.userId} onClick={handleGetAllNews}/>
 						</div>
 					</li> 
 				))}

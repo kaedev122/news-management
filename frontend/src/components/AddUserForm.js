@@ -9,34 +9,43 @@ const AddUserForm = (props) => {
 
 	const handleAddUser = async (e) => {
 		e.preventDefault();
-		// try {
-		// 	await axios.post('http://localhost:30/', { 
-		// 		"title": title, 
-		// 		"content": content, 
-		// 		"userId": props.userId,
-		// 		"username": props.username
-		// 	}).then(res => {
-        //         alert(res.data);
-		// 	}).catch(err => {
-		// 		alert(err.response.data);
-		// 	});
-		// } catch (error) {
-		// 	console.error("Error adding news: ", error);
-		// }
+		var dropdownValue = document.querySelector(".role-list").value;
+		if (password == confirmPassword) {
+			try {
+				await axios.post('http://localhost:3001/api/user', { 
+					"username": username,
+					"fullname": fullname,
+					"password": password,
+					"roleAdmin": dropdownValue
+				}).then(res => {
+					alert(res.data);
+				}).catch(err => {
+					alert(err.response.data);
+				});
+			} catch (error) {
+				console.error("Error adding user: ", error);
+			}
+		} else {
+			alert("Your password and confirmation password do not match!")
+		}
 	};
 
 	return (
-		<form className='add-news-form'>
+		<form className='add-form user-form'>
 			<p>Username</p>
 			<input className='popup-input popup-input-title' placeholder='Username' onChange={(event) => { setUsername(event.target.value) }}></input>
             <p>Fullname</p>
 			<input className='popup-input popup-input-title' placeholder='Fullname' onChange={(event) => { setFullname(event.target.value) }}></input>
 			<p>Password</p>
-			<input type="password" className='popup-input popup-input-content' placeholder='Password' onChange={(event) => { setPassword(event.target.value) }}></input>
+			<input type="password" className='popup-input popup-input-title' placeholder='Password' onChange={(event) => { setPassword(event.target.value) }}></input>
             <p>Confirm password</p>
-			<input type="password" className='popup-input popup-input-content' placeholder='Confirm password' onChange={(event) => { setConfirmPassword(event.target.value) }}></input>
-			<input type="radio" ></input>
-            <button onClick={handleAddUser}>Post</button>
+			<input type="password" className='popup-input popup-input-title' placeholder='Confirm password' onChange={(event) => { setConfirmPassword(event.target.value) }}></input>
+			<p>Select account role: </p>
+			<select className="role-list">
+				<option value="false">User</option>
+				<option value="true">Admin</option>
+			</select>
+            <button className="add-user-button" onClick={handleAddUser}>Add new user!</button>
 		</form>
 	)
 };

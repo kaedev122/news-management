@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {useLocation, useNavigate} from 'react-router-dom';
 import NewsList from "./NewsList";
 import AddNewsForm from "./AddNewsForm";
@@ -16,18 +16,28 @@ function Home() {
         <div className="container">
             <div className="header">
                 <div className="navbar">
-                    { roleAdmin ? (
-                        <div className="add-user-button" onClick={() => setAddUserPopup(true)}>
-                            <i className="ti-plus"></i>
-                            <p>Add user</p>
-                        </div>) : ''
-                    }
-                    <i className="navbar-logo ti-layout-media-center-alt"></i>
-                    <i className="login-info ti-shift-left" onClick={() => history("/login")}></i>
-                    <p className="login-info">Login as {location.state.username}</p>
-                    <i className="login-info ti-user"></i>
+                    <div className="navbar-item navbar-logo">
+                        <i className="ti-layout-media-center-alt"></i>
+                    </div>
+                    <div className="navbar-item navbar-login-info">
+                        <i className="ti-user"></i>
+                        <p className="">Login as {location.state.username}</p>
+                    </div>
+                    <div className="navbar-item navbar-button">
+                        { roleAdmin ? (
+                            <div className="navbar-item navbar-add-user-button" onClick={() => setAddUserPopup(true)}>
+                                <i className="ti-plus"></i>
+                                <p>Add user</p>
+                            </div>) : ''
+                        }
+                        <div className="navbar-item navbar-logout">
+                            <p>Logout</p>
+                            <i className="ti-shift-left" onClick={() => history("/login")}></i>
+                        </div>
+                    </div>
                 </div>
             </div>
+            {/* ///////////////////////////////////////////////////////////////////////////////////////////////// */}
             <div className="homepage">
                 <h1>NEWS MANAGEMENT</h1>
                 <NewsList userId={location.state.userId} username={location.state.username} />
@@ -36,7 +46,7 @@ function Home() {
                 <i className="add-button ti-plus"></i>
             </div>
             { addNewsPopup ? (
-                <div className="add-news-form-popup">
+                <div className="add-form-popup">
                     <div className="close-popup" onClick={() => setAddNewsPopup(false)}>
                         <i className="ti-close"></i>
                     </div>
@@ -44,7 +54,7 @@ function Home() {
                 </div>
 			) : ''}
             { addUserPopup ? (
-                <div className="add-news-form-popup">
+                <div className="add-form-popup user-form-popup">
                     <div className="close-popup" onClick={() => setAddUserPopup(false)}>
                         <i className="ti-close"></i>
                     </div>

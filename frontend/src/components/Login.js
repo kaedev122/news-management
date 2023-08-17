@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import axios from "axios";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
 
@@ -18,7 +18,6 @@ function Login() {
                 "password": password
             })
             .then(res => {
-                alert(res.data.msg);
                 history("/home", { state: {userId:res.data._id, username:res.data.username, roleAdmin:res.data.roleAdmin} });
             })
             .catch(err => {
@@ -32,14 +31,16 @@ function Login() {
 
     return (
         <div className="login-form">
-            <h1>News Management</h1>
-            <form action="POST">
-                <h1>Username</h1>
-                <input className='login-input' type="username" onChange={(event) => { setUsername(event.target.value) }} placeholder="Username"  />
-                <h1>Password</h1>
-                <input className='login-input' type="password" onChange={(event) => { setPassword(event.target.value) }} placeholder="Password"  />
-                <input className='login-submit' type="submit" onClick={submit} value={'Login'}/>
-            </form>
+            <h1>News Management Login</h1>
+            <div className="login-form-input">
+                <form action="POST">
+                    <h2>Username</h2>
+                    <input className='login-input' type="username" onChange={(event) => { setUsername(event.target.value) }} placeholder="Username"  />
+                    <h2>Password</h2>
+                    <input className='login-input' type="password" onChange={(event) => { setPassword(event.target.value) }} placeholder="Password"  />
+                    <button className='login-submit' type="submit" onClick={submit}>LOGIN</button>
+                </form>
+            </div>
         </div>
     )
 }
