@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const DeleteNews = (props) => {
     const handleDeleteYourNews = async () => {
-        await axios.delete(`http://localhost:3001/api/news/${props.news._id}`, {
+        await axios.delete(`https://news-management.vercel.app/api/news/${props.news._id}`, {
             data: {userId: props.userId}
         })
         .then(res => {
