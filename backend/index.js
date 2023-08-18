@@ -8,7 +8,7 @@ require('dotenv/config');
 const app = express();
 app.use(cors(
     {
-        origin: ["https://news-management.vercel.app"],
+        origin: ["https://news-management-chsw.vercel.app/"],
         methods: ["POST", "GET"],
         credentials: true
 ));
