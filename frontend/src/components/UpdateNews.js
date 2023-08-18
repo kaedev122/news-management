@@ -7,7 +7,7 @@ const UpdateNews = (props) => {
 	const [content, setContent] = useState(props.news.content);
 
     const handleUpdateYourNews = async () => {
-        await axios.put(`https://news-management.vercel.app/api/news/${props.news._id}`, {
+        await axios.put(`https://news-management-api.vercel.app/api/news/${props.news._id}`, {
             userId: props.userId,
             title: title,
             content: content
