@@ -9,7 +9,9 @@ const app = express();
 app.use(cors(
     {
         origin: ["https://news-management-chsw.vercel.app"],
-        methods: ["POST", "GET"],
+        methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+        preflightContinue: false,
+        optionsSuccessStatus: 204,
         credentials: true
 ));
 app.use(express.json());
