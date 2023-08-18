@@ -13,7 +13,7 @@ function Login() {
         e.preventDefault();
 
         try{
-            await axios.post("https://news-management.vercel.app/login", {
+            await axios.post("https://news-management-api.vercel.app/login", {
                 "username": username, 
                 "password": password
             })
