@@ -6,7 +6,12 @@ require('dotenv/config');
 
 //routes
 const app = express();
-app.use(cors());
+app.use(cors(
+    {
+        origin: ["https://news-management.vercel.app"],
+        methods: ["POST", "GET"],
+        credentials: true
+));
 app.use(express.json());
 app.use(express.urlencoded());
 app.use('/', routesHandler);
