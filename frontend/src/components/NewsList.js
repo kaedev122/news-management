@@ -19,7 +19,7 @@ const NewsList = (props) => {
 	}
 
 	const handleGetAllNews = async () => {
-		await axios.get('http://localhost:3001/api/news')
+		await axios.get('https://news-management-api.vercel.app/api/news')
 		.then(res => {
         	setNewsList(res.data.reverse());
 		})
@@ -29,7 +29,7 @@ const NewsList = (props) => {
 	};
 
 	const handleGetYourNews = async () => {
-		await axios.get(`http://localhost:3001/api/news/user/${props.username}`)
+		await axios.get(`https://news-management-api.vercel.app/api/news/user/${props.username}`)
 		.then(res => {
         	setNewsList(res.data.reverse());
 		})
