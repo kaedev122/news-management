@@ -14,8 +14,6 @@ const AddNewsForm = (props) => {
 				"userId": props.userId,
 				"username": props.username
 			}).then(res => {
-				props.done_action()
-				console.log(res.data)
                 alert(res.data);
 			}).catch(err => {
 				alert(err.response.data);
