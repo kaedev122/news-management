@@ -8,12 +8,13 @@ const AddNewsForm = (props) => {
 	const handleAddNews = async (e) => {
 		e.preventDefault();
 		try {
-			await axios.post('https://news-management.vercel.app/api/news', { 
+			await axios.post('http://localhost:3001/api/news', { 
 				"title": title, 
 				"content": content, 
 				"userId": props.userId,
 				"username": props.username
 			}).then(res => {
+				props.done_action()
 				console.log(res.data)
                 alert(res.data);
 			}).catch(err => {

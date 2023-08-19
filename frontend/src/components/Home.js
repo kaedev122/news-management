@@ -12,6 +12,10 @@ function Home() {
     const [addNewsPopup, setAddNewsPopup] = useState(false);
     const [roleAdmin, setRoleAdmin] = useState(location.state.roleAdmin);
 
+    const done = () => {
+        console.log('===============================================')
+    }
+
     return (
         <div className="container">
             <div className="header">
@@ -50,7 +54,7 @@ function Home() {
                     <div className="close-popup" onClick={() => setAddNewsPopup(false)}>
                         <i className="ti-close"></i>
                     </div>
-                    <AddNewsForm userId={location.state.userId} username={location.state.username}/>
+                    <AddNewsForm userId={location.state.userId} username={location.state.username} done_action={done}/>
                 </div>
 			) : ''}
             { addUserPopup ? (

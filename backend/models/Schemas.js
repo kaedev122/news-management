@@ -20,7 +20,7 @@ const newsSchema = new Schema({
     title: {type:String, required:true},
     content: {type:String, required:true},
     userId: {type:Schema.Types.ObjectId, ref:'users'},
-    username: {type:String},
+    username: {type:String, required:true, ref:'users'},
     entryDate: {type:Date, default:Date.now}
 })
 

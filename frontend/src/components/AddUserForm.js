@@ -12,10 +12,10 @@ const AddUserForm = (props) => {
 		var dropdownValue = document.querySelector(".role-list").value;
 		if (password == confirmPassword) {
 			try {
-				await axios.post('https://news-management.vercel.app/api/user', { 
+				await axios.post('http://localhost:3001/api/user', { 
 					"username": username,
 					"fullname": fullname,
-					"password": password,
+					"password": password, 
 					"roleAdmin": dropdownValue
 				}).then(res => {
 					alert(res.data);
