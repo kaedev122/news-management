@@ -4,13 +4,16 @@ import DeleteNews from "./DeleteNews";
 import UpdateNews from "./UpdateNews";
 import moment from 'moment';
 import 'moment/locale/vi';
+import { useSelector, useDispatch } from 'react-redux';
+import { setNews, addNews, updateNews, removeNews, selectNews } from '../redux/newsSlice';
 
 const NewsList = (props) => {
-	const [newsList, setNewsList] = useState([]);
+	const newsData = useSelector(state => state.news.news);
+	const dispatch = useDispatch();
 
 	useEffect(() => {
 		handleGetAllNews();
-  	}, []);
+  	}, [newsData]);
 
 	moment.locale("vi");
 
@@ -19,19 +22,19 @@ const NewsList = (props) => {
 	}
 
 	const handleGetAllNews = async () => {
-		await axios.get('https://news-management-api.vercel.app/api/news')
-		.then(res => {
-        	setNewsList(res.data.reverse());
-		})
-		.catch(err => {
+		try {
+			const res = await axios.get('https://news-management-api.vercel.app/api/news');
+			dispatch(setNews(res.data.reverse()));
+			console.log(newsData);
+		} catch (err) {
         	alert(err);
-      	});
+      	};
 	};
 
 	const handleGetYourNews = async () => {
 		await axios.get(`https://news-management-api.vercel.app/api/news/user/${props.username}`)
 		.then(res => {
-        	setNewsList(res.data.reverse());
+        	dispatch(setNews(res.data.reverse()));
 		})
 		.catch(err => {
         	alert(err);
@@ -44,8 +47,8 @@ const NewsList = (props) => {
                 <button onClick={handleGetAllNews}>Show all</button>
                 <button onClick={handleGetYourNews}>Show yours</button>
             </div>
-      		<ul>
-        		{ newsList.map(news => (
+			<ul>
+        		{ newsData.map(news => (
           			<li>
 						<h2>{news.title}</h2>
 						<p>{news.content}</p>

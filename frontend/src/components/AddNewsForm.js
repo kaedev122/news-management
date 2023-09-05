@@ -1,19 +1,26 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { setNews, addNews, updateNews, removeNews, selectNews } from '../redux/newsSlice';
+import { show, hide } from '../redux/addPopupSlice';
+import { useSelector, useDispatch } from 'react-redux';
 
 const AddNewsForm = (props) => {
 	const [title, setTitle] = useState("");
 	const [content, setContent] = useState("");
+	const dispatch = useDispatch();
 
 	const handleAddNews = async (e) => {
 		e.preventDefault();
 		try {
-			await axios.post('https://news-management-api.vercel.app/api/news', { 
+			const newsPostData = { 
 				"title": title, 
 				"content": content, 
 				"userId": props.userId,
 				"username": props.username
-			}).then(res => {
+			}
+			await axios.post('https://news-management-api.vercel.app/api/news', newsPostData).then(res => {
+				dispatch(addNews(newsPostData))
+				dispatch(hide())
                 alert("Post success!");
 			}).catch(err => {
 				alert(err.response.data);

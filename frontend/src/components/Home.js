@@ -3,13 +3,18 @@ import {useLocation, useNavigate} from 'react-router-dom';
 import NewsList from "./NewsList";
 import AddNewsForm from "./AddNewsForm";
 import AddUserForm from "./AddUserForm";
+import { show, hide } from '../redux/addPopupSlice';
+import { useSelector, useDispatch } from 'react-redux';
 
 function Home() {
     const location = useLocation();
     const history = useNavigate();
 
+    const popupStatus = useSelector(state => state.addPopup.popup);
+	const dispatch = useDispatch();
+
     const [addUserPopup, setAddUserPopup] = useState(false);
-    const [addNewsPopup, setAddNewsPopup] = useState(false);
+    // const [addNewsPopup, setAddNewsPopup] = useState(false);
     const [roleAdmin, setRoleAdmin] = useState(location.state.roleAdmin);
 
     return (
@@ -42,12 +47,12 @@ function Home() {
                 <h1>NEWS MANAGEMENT</h1>
                 <NewsList userId={location.state.userId} username={location.state.username} />
             </div>
-            <div className="add-news-button" onClick={() => setAddNewsPopup(true)}>
+            <div className="add-news-button" onClick={() => dispatch(show())}>
                 <i className="add-button ti-plus"></i>
             </div>
-            { addNewsPopup ? (
+            { popupStatus ? (
                 <div className="add-form-popup">
-                    <div className="close-popup" onClick={() => setAddNewsPopup(false)}>
+                    <div className="close-popup" onClick={() => dispatch(hide())}>
                         <i className="ti-close"></i>
                     </div>
                     <AddNewsForm userId={location.state.userId} username={location.state.username}/>
